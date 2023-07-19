@@ -1,13 +1,11 @@
 import {Table, Model, Column, DataType} from "sequelize-typescript"
 
-interface TableAttr{
-    full_name: string
-    birth_day: string
-    salary: number
-    companyId: number
+interface TableAttr {
+  first_name: string
+  last_name: string;
 }
 
-@Table({ tableName: 'builder' })
+@Table({ tableName: 'driver' })
 export class Tablee extends Model<Tablee, TableAttr> {
   @Column({
     type: DataType.INTEGER,
@@ -16,21 +14,11 @@ export class Tablee extends Model<Tablee, TableAttr> {
   })
   id: number;
   @Column({
-    type: DataType.STRING,
-    allowNull: true,
-    unique: true,
+    type: DataType.STRING(64),
   })
-  full_name: string;
+  first_name: string;
   @Column({
-    type: DataType.STRING(100),
+    type: DataType.STRING(64),
   })
-  birth_day: string;
-  @Column({
-    type: DataType.INTEGER,
-  })
-  salary: number;
-  @Column({
-    type: DataType.INTEGER,
-  })
-  companyId: number
+  last_name: string
 }

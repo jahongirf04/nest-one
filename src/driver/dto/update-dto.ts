@@ -1,6 +1,4 @@
 export class UpdateDto {
-  full_name?: string;
-  birth_day?: string;
-  salary?: number;
-  companyId?: number;
+  first_name?: string;
+  last_name?: string;
 }

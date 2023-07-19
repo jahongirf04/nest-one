@@ -5,7 +5,7 @@ import { AddDto } from './dto/add-dto';
 import { UpdateDto } from './dto/update-dto';
 
 @Injectable()
-export class CompanyService {
+export class Service {
   constructor(
     @InjectModel(Tablee)
     private tableRepo: typeof Tablee,
