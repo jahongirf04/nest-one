@@ -11,7 +11,7 @@ import { Service } from './service';
 import { AddDto } from './dto/add-dto';
 import { UpdateDto } from './dto/update-dto';
 
-@Controller('machine-driver')
+@Controller('machine')
 export class myController {
   constructor(private readonly service: Service) {}
 

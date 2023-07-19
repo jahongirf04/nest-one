@@ -2,6 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { CompanyModule } from './company/company.module';
+import { myModule as BuilderModule } from './builder/module';
+import { myModule as DriverModule } from './driver/module';
+import { myModule as MachineModule } from './machine/module';
+import { myModule as MachineDriverModule } from './machine-driver/module';
 
 @Module({
   imports: [
@@ -15,9 +19,13 @@ import { CompanyModule } from './company/company.module';
       database: process.env.POSTGRES_DB,
       models: [],
       autoLoadModels: true,
-      logging: true
+      logging: true,
     }),
     CompanyModule,
+    BuilderModule,
+    DriverModule,
+    MachineDriverModule,
+    MachineModule,
   ],
   controllers: [],
   providers: [],

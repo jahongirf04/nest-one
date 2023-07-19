@@ -1,4 +1,4 @@
-import {Table, Model, Column, DataType} from "sequelize-typescript"
+import {Table, Model, Column, DataType, ForeignKey, BelongsTo} from "sequelize-typescript"
 
 interface TableAttr{
     full_name: string
@@ -7,8 +7,10 @@ interface TableAttr{
     companyId: number
 }
 
+import {Company} from "../../company/models/company.model"
+
 @Table({ tableName: 'builder' })
-export class Tablee extends Model<Tablee, TableAttr> {
+export class Builder extends Model<Builder, TableAttr> {  
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
@@ -29,8 +31,12 @@ export class Tablee extends Model<Tablee, TableAttr> {
     type: DataType.INTEGER,
   })
   salary: number;
+  @ForeignKey(()=>Company)
   @Column({
     type: DataType.INTEGER,
   })
   companyId: number
+
+  @BelongsTo(()=>Company)
+  company: Company
 }

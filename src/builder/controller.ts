@@ -7,13 +7,13 @@ import {
   Delete,
   Get,
 } from '@nestjs/common';
-import { CompanyService } from './service';
+import { Service } from './service';
 import { AddDto } from './dto/add-dto';
 import { UpdateDto } from './dto/update-dto';
 
 @Controller('builder')
-export class CompanyController {
-  constructor(private readonly service: CompanyService) {}
+export class myController {
+  constructor(private readonly service: Service) {}
 
   @Post('add')
   async add(@Body() addDto: AddDto) {

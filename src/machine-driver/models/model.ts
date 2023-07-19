@@ -1,4 +1,6 @@
-import {Table, Model, Column, DataType} from "sequelize-typescript"
+import {Table, Model, Column, DataType, ForeignKey, BelongsTo} from "sequelize-typescript"
+import { Driver } from "src/driver/models/model";
+import { Machine } from "src/machine/models/model";
 
 interface TableAttr {
   machineId: number;
@@ -6,19 +8,23 @@ interface TableAttr {
 }
 
 @Table({ tableName: 'machine-driver' })
-export class Tablee extends Model<Tablee, TableAttr> {
+export class MachineDriver extends Model<MachineDriver, TableAttr> {
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   })
   id: number;
+  
+  @ForeignKey(() => Machine)
   @Column({
     type: DataType.INTEGER,
   })
-  machinId: number;
+  machineId: number;
+
+  @ForeignKey(() => Driver)
   @Column({
     type: DataType.INTEGER,
   })
-  driverId: number
+  driverId: number;
 }

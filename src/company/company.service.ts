@@ -1,32 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Tablee } from './models/company.model';
+import { Company } from './models/company.model';
 import { AddDto } from './dto/add.dto';
 import { UpdateDto } from './dto/update-dto';
 
 @Injectable()
 export class CompanyService {
   constructor(
-    @InjectModel(Tablee)
-    private tableRepo: typeof Tablee,
+    @InjectModel(Company)
+    private tableRepo: typeof Company,
   ) {}
 
-  async add(addDto: AddDto): Promise<Tablee> {
+  async add(addDto: AddDto): Promise<Company> {
     const company = await this.tableRepo.create(addDto);
     return company;
   }
 
   async get() {
-    const args = await this.tableRepo.findAll();
+    const args = await this.tableRepo.findAll({ include: { all: true } });
     return args;
   }
 
-  async getOne(myId): Promise<Tablee> {
-    const arg = await this.tableRepo.findOne({ where: { id: myId } });
+  async getOne(myId): Promise<Company> {
+    const arg = await this.tableRepo.findOne({
+      where: { id: myId },
+      include: { all: true },
+    });
     return arg;
   }
 
-  async update(updateDto: UpdateDto, myId): Promise<Tablee> {
+  async update(updateDto: UpdateDto, myId): Promise<Company> {
     await this.tableRepo.update(updateDto, { where: { id: myId } });
     return;
   }
