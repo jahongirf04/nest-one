@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, UnauthorizedException } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { JwtService } from '@nestjs/jwt';
@@ -40,9 +40,8 @@ export class AuthService {
     try{
     const user = await this.userService.getUserByEmail(loginDto.email);
     if (!user) {
-      throw new HttpException(
+      throw new UnauthorizedException(
         "Email yoki password noto'g'ri",
-        HttpStatus.BAD_REQUEST,
       );
     }
     const is_valid_password = await bcrypt.compare(
@@ -50,13 +49,12 @@ export class AuthService {
       user.password,
     );
     if (!is_valid_password) {
-      throw new HttpException(
+      throw new UnauthorizedException(
         "Email yoki password noto'g'ri",
-        HttpStatus.BAD_REQUEST,
       );
     }
 
-    return { message: 'Xush kelibsiz', token: this.generateToken(user) };
+    return { message: 'Xush kelibsiz', token: await this.generateToken(user) };
   } catch(e){
     return e.message
   }

@@ -1,4 +1,6 @@
-import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
+import { ApiProperty } from "@nestjs/swagger";
+import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Post } from "src/posts/models/post.model";
 import { Role } from "src/roles/models/role.model";
 import { UserRoles } from "src/roles/models/user-roles.model";
 
@@ -11,6 +13,7 @@ interface UserCreationAttrs{
 
 @Table({ tableName: 'users' })
 export class User extends Model<User, UserCreationAttrs> {
+  @ApiProperty({ example: 1, description: 'Unikal id' })
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
@@ -18,12 +21,17 @@ export class User extends Model<User, UserCreationAttrs> {
   })
   id: number;
 
+  @ApiProperty({ example: 'user1', description: 'Foydalanuvchi nomi' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   name: string;
 
+  @ApiProperty({
+    example: 'soli@mail.uz',
+    description: 'Foydalanuvchi pochtasi',
+  })
   @Column({
     type: DataType.STRING,
     unique: true,
@@ -31,12 +39,14 @@ export class User extends Model<User, UserCreationAttrs> {
   })
   email: string;
 
+  @ApiProperty({ example: 'pa$$w0rd', description: 'Foydalanuvchi paroli' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   password: string;
 
+  @ApiProperty({ example: true, description: 'Foydalanuvchi aktiv yoki aktiv emmasligi' })
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: false,
@@ -45,4 +55,7 @@ export class User extends Model<User, UserCreationAttrs> {
 
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
+
+  @HasMany(()=> Post)
+  posts: Post[]
 }
