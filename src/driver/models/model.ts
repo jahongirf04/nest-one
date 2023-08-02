@@ -1,6 +1,6 @@
 import {Table, Model, Column, DataType, BelongsToMany} from "sequelize-typescript"
-import { MachineDriver } from "src/machine-driver/models/model";
-import { Machine } from "src/machine/models/model";
+import { MachineDriver } from "../../machine-driver/models/model";
+import { Machine } from "../../machine/models/model";
 
 interface TableAttr {
   first_name: string

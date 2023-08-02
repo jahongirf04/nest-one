@@ -1,15 +1,21 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
-import { Post } from "src/posts/models/post.model";
-import { Role } from "src/roles/models/role.model";
-import { UserRoles } from "src/roles/models/user-roles.model";
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  BelongsToMany,
+  Column,
+  DataType,
+  HasMany,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Post } from '../../posts/models/post.model';
+import { Role } from '../../roles/models/role.model';
+import { UserRoles } from '../../roles/models/user-roles.model';
 
-interface UserCreationAttrs{
-    name: string,
-    email: string,
-    password: string
+interface UserCreationAttrs {
+  name: string;
+  email: string;
+  password: string;
 }
-
 
 @Table({ tableName: 'users' })
 export class User extends Model<User, UserCreationAttrs> {
@@ -46,7 +52,10 @@ export class User extends Model<User, UserCreationAttrs> {
   })
   password: string;
 
-  @ApiProperty({ example: true, description: 'Foydalanuvchi aktiv yoki aktiv emmasligi' })
+  @ApiProperty({
+    example: true,
+    description: 'Foydalanuvchi aktiv yoki aktiv emmasligi',
+  })
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: false,
@@ -56,6 +65,6 @@ export class User extends Model<User, UserCreationAttrs> {
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
 
-  @HasMany(()=> Post)
-  posts: Post[]
+  @HasMany(() => Post)
+  posts: Post[];
 }

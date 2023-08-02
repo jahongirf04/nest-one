@@ -7,7 +7,7 @@ interface CompanyAttr{
 }
 
 import {Builder} from "../../builder/models/model"
-import { Machine } from "src/machine/models/model"
+import { Machine } from "../../machine/models/model"
 
 @Table({ tableName: 'company' })
 export class Company extends Model<Company, CompanyAttr> {

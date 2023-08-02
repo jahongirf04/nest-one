@@ -1,6 +1,6 @@
 import {Table, Model, Column, DataType, ForeignKey, BelongsTo} from "sequelize-typescript"
-import { Driver } from "src/driver/models/model";
-import { Machine } from "src/machine/models/model";
+import { Driver } from "../../driver/models/model";
+import { Machine } from "../../machine/models/model";
 
 interface TableAttr {
   machineId: number;
